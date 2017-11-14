@@ -16,6 +16,7 @@ public class LivroController extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private static final String INSERT_OR_EDIT = "/livro.jsp";
     private static final String LIST_USER = "/listar.jsp";
+    private static final String ATUALIZAR = "/atualizar.jsp";
     private final LivroDao dao;
 
     public LivroController() {
@@ -34,10 +35,10 @@ public class LivroController extends HttpServlet {
             forward = LIST_USER;
             request.setAttribute("livros", dao.todosLivros());
         } else if (action.equalsIgnoreCase("edit")) {
-            forward = INSERT_OR_EDIT;
+            forward = ATUALIZAR;
             String livroISBN = request.getParameter("ISBN");
-            Livro user = dao.livroPorISNB(livroISBN);
-            request.setAttribute("user", user);
+            Livro livro = dao.livroPorISNB(livroISBN);
+            request.setAttribute("livro", livro);
         } else if (action.equalsIgnoreCase("listUser")) {
             forward = LIST_USER;
             request.setAttribute("livros", dao.todosLivros());
@@ -47,6 +48,7 @@ public class LivroController extends HttpServlet {
 
         RequestDispatcher view = request.getRequestDispatcher(forward);
         view.forward(request, response);
+
     }
 
     @Override
@@ -57,13 +59,8 @@ public class LivroController extends HttpServlet {
         livro.setAnoLancamento(request.getParameter("anoLancamento"));
         livro.setISBN(request.getParameter("ISBN"));
       
-        String livroISBN = request.getParameter("ISBN");
-//        if (livroISBN == null || livroISBN.isEmpty()) {
-            dao.adicionarLivro(livro);
-//        } else {
-//            livro.setISBN(livroISBN);
-//            dao.atualizarLivro(livro);
-//        }
+       dao.adicionarLivro(livro);
+      
         RequestDispatcher view = request.getRequestDispatcher(LIST_USER);
         request.setAttribute("livros", dao.todosLivros());
         view.forward(request, response);

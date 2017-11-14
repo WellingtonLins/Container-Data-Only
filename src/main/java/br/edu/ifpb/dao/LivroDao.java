@@ -51,11 +51,8 @@ public class LivroDao {
     public void atualizarLivro(Livro livro) {
         try {
             PreparedStatement preparedStatement = connection
-                    .prepareStatement("update livro set descricao=?, edicao=?"
-                            + " anoLancamento=? where ISBN=?");
+                    .prepareStatement("update livro set descricao=?, edicao=?,anoLancamento=? where ISBN=?");
 
-            // Parameters start with 1
-            // Parameters start with 1
             preparedStatement.setString(1, livro.getDescricao());
             preparedStatement.setString(2, livro.getEdicao());
             preparedStatement.setString(3, livro.getAnoLancamento());
@@ -93,7 +90,7 @@ public class LivroDao {
         Livro livro = new Livro();
         try {
             PreparedStatement preparedStatement = connection.
-                    prepareStatement("select * from livro where id=?");
+                    prepareStatement("select * from livro where ISBN=?");
             preparedStatement.setString(1, livroISBN);
             ResultSet rs = preparedStatement.executeQuery();
 
@@ -101,7 +98,7 @@ public class LivroDao {
                 livro.setISBN(rs.getString("ISBN"));
                 livro.setDescricao(rs.getString("descricao"));
                 livro.setEdicao(rs.getString("edicao"));
-                livro.setEdicao(rs.getString("anoLancamento"));
+                livro.setAnoLancamento(rs.getString("anoLancamento"));
 
             }
         } catch (SQLException e) {

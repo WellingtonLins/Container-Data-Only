@@ -12,9 +12,12 @@
         <link rel="stylesheet" href="css/bootstrap-responsive.css"/>
     </head>
     <body>
+    <section>
+        <h1>Atualizar</h1>
+    </section>
         <div class="container espaco">
             <div class="offset3 span6 offset3">
-                <form class="form-signin" role="form" method="POST" action='LivroController'>
+                <form class="form-signin" role="form" method="POST" action='AtualizarLivroController'>
                     <h2 class="form-signin-heading">Insira seus dados</h2>
 
                     ISBN : <input type="text"  class="form-control"  name="ISBN"
