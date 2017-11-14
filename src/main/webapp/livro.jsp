@@ -14,17 +14,20 @@
     <body>
         <div class="container espaco">
             <div class="offset3 span6 offset3">
-                <form class="form-signin" role="form" method="POST" action='UserController' name="frmAddUser">
+                <form class="form-signin" role="form" method="POST" action='LivroController'>
                     <h2 class="form-signin-heading">Insira seus dados</h2>
 
-                    User ID : <input type="text"  class="form-control" readonly="readonly" name="id"
-                                     value="<c:out value="${user.id}" />" /> <br /> 
-                    Nome : <input
-                        type="text" name="nome"  class="form-control"
-                        value="<c:out value="${user.nome}" />" /> <br /> 
-                    CPF: <input
-                        type="text" name="CPF"  class="form-control"
-                        value="<c:out value="${user.cpf}" />" /> <br /> 
+                    ISBN : <input type="text"  class="form-control"  name="ISBN"
+                                  value="<c:out value="${user.ISBN}" />" /> <br /> 
+                    Descrição : <input
+                        type="text" name="descricao"  class="form-control"
+                        value="<c:out value="${user.descricao}" />" /> <br /> 
+                    
+                    Edição: <input  type="text" name="edicao"  class="form-control"
+                        value="<c:out value="${user.edicao}" />" /> <br /> 
+                    
+                    Lançamento: <input type="text" name="anoLancamento"  class="form-control"
+                        value="<c:out value="${user.anoLancamento}" />" /> <br /> 
 
                     <button class="btn btn-lg btn-primary btn-block" type="submit">Enviar</button>
                 </form>

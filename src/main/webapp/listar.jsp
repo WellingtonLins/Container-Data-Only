@@ -19,26 +19,28 @@
 
                         <thead>
                             <tr>
-                                <th>Id</th>
-                                <th>Nome</th>               
-                                <th>CPF</th>
+                                <th>ISBN</th>
+                                <th>Descrição</th>               
+                                <th>Edição</th>
+                                <th>Lançamento</th>               
 
                                 <th colspan=2>Action</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${users}" var="user">
+                            <c:forEach items="${livros}" var="user">
                                 <tr>
-                                    <td><c:out value="${user.id}" /></td>
-                                    <td><c:out value="${user.nome}" /></td>
-                                    <td><c:out value="${user.cpf}"/></td>
-                                    <td><a href="UserController?action=edit&userId=<c:out value="${user.id}"/>">Update</a></td>
-                                    <td><a href="UserController?action=delete&userId=<c:out value="${user.id}"/>">Delete</a></td>
+                                    <td><c:out value="${user.ISBN}" /></td>
+                                    <td><c:out value="${user.descricao}" /></td>
+                                    <td><c:out value="${user.edicao}"/></td>
+                                    <td><c:out value="${user.anoLancamento}"/></td>
+                                    <td><a href="LivroController?action=edit&ISBN=<c:out value="${user.ISBN}"/>">Update</a></td>
+                                    <td><a href="LivroController?action=delete&ISBN=<c:out value="${user.ISBN}"/>">Delete</a></td>
                                 </tr>
                             </c:forEach>
                         </tbody>
                     </table>
-                    <p><a href="UserController?action=insert">Add User</a></p>
+                    <p><a href="LivroController?action=insert">Add User</a></p>
                 </div>
             </div>
         </div>

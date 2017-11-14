@@ -1,8 +1,8 @@
 package br.edu.ifpb.controller;
 
 
-import br.edu.ifpb.dao.UserDao;
-import br.edu.ifpb.model.Pessoa;
+import br.edu.ifpb.dao.LivroDao;
+import br.edu.ifpb.model.Livro;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -11,16 +11,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class UserController extends HttpServlet {
+public class LivroController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private static final String INSERT_OR_EDIT = "/user.jsp";
-    private static final String LIST_USER = "/listUser.jsp";
-    private final UserDao dao;
+    private static final String INSERT_OR_EDIT = "/livro.jsp";
+    private static final String LIST_USER = "/listar.jsp";
+    private final LivroDao dao;
 
-    public UserController() {
+    public LivroController() {
         super();
-        dao = new UserDao();
+        dao = new LivroDao();
     }
 
     @Override
@@ -29,18 +29,18 @@ public class UserController extends HttpServlet {
         String action = request.getParameter("action");
 
         if (action.equalsIgnoreCase("delete")) {
-            int userId = Integer.parseInt(request.getParameter("userId"));
-            dao.deleteUser(userId);
+            String livroISBN = request.getParameter("ISBN");
+            dao.deleteLivro(livroISBN);
             forward = LIST_USER;
-            request.setAttribute("users", dao.getAllUsers());
+            request.setAttribute("livros", dao.todosLivros());
         } else if (action.equalsIgnoreCase("edit")) {
             forward = INSERT_OR_EDIT;
-            int userId = Integer.parseInt(request.getParameter("userId"));
-            Pessoa user = dao.getUserById(userId);
+            String livroISBN = request.getParameter("ISBN");
+            Livro user = dao.livroPorISNB(livroISBN);
             request.setAttribute("user", user);
         } else if (action.equalsIgnoreCase("listUser")) {
             forward = LIST_USER;
-            request.setAttribute("users", dao.getAllUsers());
+            request.setAttribute("livros", dao.todosLivros());
         } else {
             forward = INSERT_OR_EDIT;
         }
@@ -49,20 +49,23 @@ public class UserController extends HttpServlet {
         view.forward(request, response);
     }
 
+    @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Pessoa user = new Pessoa();
-        user.setNome(request.getParameter("nome"));
-        user.setCpf(request.getParameter("CPF"));
+        Livro livro = new Livro();
+        livro.setDescricao(request.getParameter("descricao"));
+        livro.setEdicao(request.getParameter("edicao"));
+        livro.setAnoLancamento(request.getParameter("anoLancamento"));
+        livro.setISBN(request.getParameter("ISBN"));
       
-        String userid = request.getParameter("id");
-        if (userid == null || userid.isEmpty()) {
-            dao.addUser(user);
-        } else {
-            user.setId(Integer.parseInt(userid));
-            dao.updateUser(user);
-        }
+        String livroISBN = request.getParameter("ISBN");
+//        if (livroISBN == null || livroISBN.isEmpty()) {
+            dao.adicionarLivro(livro);
+//        } else {
+//            livro.setISBN(livroISBN);
+//            dao.atualizarLivro(livro);
+//        }
         RequestDispatcher view = request.getRequestDispatcher(LIST_USER);
-        request.setAttribute("users", dao.getAllUsers());
+        request.setAttribute("livros", dao.todosLivros());
         view.forward(request, response);
     }
 }
