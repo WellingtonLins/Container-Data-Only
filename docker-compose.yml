@@ -1,8 +1,8 @@
 version: '2'
 networks:
-  rede-dcker:
+  rede-docker:
     external:
-      name: rede-dcker
+      name: rede-docker
 services:
  postgres:
   build: ./postgres
@@ -13,7 +13,7 @@ services:
   volumes:
     - ./postgres/data:/var/lib/postgresql/data
   networks: 
-    - rede-dcker
+    - rede-docker
  web:
   build: .
   image: crud-livro/app
@@ -23,4 +23,4 @@ services:
   links: 
     - "postgres:host-banco"
   networks:
-    - rede-dcker
+    - rede-docker

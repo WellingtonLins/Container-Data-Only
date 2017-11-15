@@ -17,7 +17,7 @@
                 <form class="form-signin" role="form" method="POST" action='LivroController'>
                     <h2 class="form-signin-heading">Insira seus dados</h2>
 
-                    ISBN : <input type="text"  class="form-control"  name="ISBN"
+                    ISBN : <input type="text"  class="form-control" readonly="readonly" name="ISBN"
                                   value="<c:out value="${livro.ISBN}" />" /> <br /> 
                     Descrição : <input
                         type="text" name="descricao"  class="form-control"

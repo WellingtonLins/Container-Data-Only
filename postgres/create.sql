@@ -19,6 +19,7 @@ CREATE TABLE livro_autor(
    codigo_autor Integer,
    ISNB_livro character varying(20),
    PRIMARY KEY( codigo_autor ,ISNB_livro),
-   FOREIGN KEY (codigo_autor) REFERENCES  autor,
-   FOREIGN KEY (ISNB_livro) REFERENCES  livro
+   FOREIGN KEY (codigo_autor) REFERENCES  autor(codigo)  ON DELETE CASCADE,
+   FOREIGN KEY (ISNB_livro) REFERENCES  livro(ISBN) ON DELETE CASCADE
 );
+

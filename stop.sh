@@ -7,8 +7,8 @@
 # docker kill banco
 # docker rm banco
 # docker rmi -f ricardojob/banco
-# docker network rm antenas-de-vinil
+# docker network rm rede-docker
 
 docker-compose down
-docker network rm antenas-de-vinil
+docker network rm rede-docker
 mvn clean
