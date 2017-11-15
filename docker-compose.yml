@@ -11,7 +11,7 @@ services:
   ports: 
     - "5433:5432"
   volumes:
-    - ./postgres/data:/var/lib/postgresql/data
+    - detalhe:/var/lib/postgresql/data
   networks: 
     - rede-docker
  web:
@@ -24,3 +24,6 @@ services:
     - "postgres:host-banco"
   networks:
     - rede-docker
+volumes:
+   detalhe:
+     driver: local
